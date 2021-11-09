@@ -16,7 +16,7 @@ public class Hero {
     @SequenceGenerator(name="seq-gen",sequenceName="order_seq",allocationSize=1)
     @GeneratedValue(strategy= GenerationType.IDENTITY, generator="seq-gen")
     @Column(name="Hero_ID", nullable = false)
-    private int ID;
+    private Long ID;
 
     @Column(name = "Hero_Name", nullable = false)
     @NotNull

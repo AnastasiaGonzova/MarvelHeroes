@@ -15,11 +15,11 @@ public class Comics {
     @SequenceGenerator(name="seq-gen",sequenceName="order_seq",allocationSize=1)
     @GeneratedValue(strategy= GenerationType.IDENTITY, generator="seq-gen")
     @Column(name="Comics_ID", nullable = false)
-    private int ID;
+    private Long ID;
 
     @Column(name = "digitalID", nullable = false)
     @NotNull
-    private int digitalID;
+    private Long digitalID;
 
     @Column(name = "Comics_Title", nullable = false)
     @NotNull

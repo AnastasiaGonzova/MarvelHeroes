@@ -13,7 +13,7 @@ public class URLImage {
     @SequenceGenerator(name="seq-gen",sequenceName="order_seq",allocationSize=1)
     @GeneratedValue(strategy= GenerationType.IDENTITY, generator="seq-gen")
     @Column(name="URLImage_ID", nullable = false)
-    private int ID;
+    private Long ID;
 
     @Column(name = "Path", nullable = false)
     @NotNull
