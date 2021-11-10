@@ -35,9 +35,9 @@ public class ComicsController{
         return comicsService.getHeroListforComicsByID(id);
     }
 
-    @PostMapping(value = "/hero/add")
+    @PostMapping(value = "/comics/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Comics> newProduct(@RequestBody Comics comics) {
+    public ResponseEntity<Comics> newComics(@RequestBody Comics comics) {
         return ResponseEntity.ok().body(this.comicsService.putComicsInformation(comics));
     }
 

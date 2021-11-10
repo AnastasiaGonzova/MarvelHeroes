@@ -37,7 +37,7 @@ public class HeroController{
 
     @PostMapping(value = "/hero/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Hero> newProduct(@RequestBody Hero hero) {
+    public ResponseEntity<Hero> newHero(@RequestBody Hero hero) {
         return ResponseEntity.ok().body(this.heroService.putHeroInformation(hero));
     }
 

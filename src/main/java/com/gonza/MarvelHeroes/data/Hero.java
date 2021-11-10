@@ -26,7 +26,7 @@ public class Hero {
     @NotNull
     private String description;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name="URLImage_ID")
     @NotNull
     private URLImage image;

@@ -33,12 +33,17 @@ public class Comics {
     @NotNull
     private int pageCount;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name="URLImage_ID")
     @NotNull
     private URLImage image;
 
-    @ManyToMany(mappedBy = "Comics")
+    @ManyToMany
+    @JoinTable(
+            name = "HeroComics",
+            joinColumns = { @JoinColumn(name = "Comics_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "Hero_ID") }
+    )
     private List<Hero> heroList;
 
     public Comics(){
