@@ -5,7 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.LinkedList;
+import java.util.List;
 
 
 @Entity
@@ -37,9 +37,25 @@ public class Hero {
             joinColumns = { @JoinColumn(name = "Hero_ID") },
             inverseJoinColumns = { @JoinColumn(name = "Comics_ID") }
     )
-    private LinkedList<Comics> ComicsList;
+    private List<Comics> comicsList;
 
     public Hero(){
 
+    }
+
+    public Hero(Long ID, String name, String description, URLImage image) {
+        this.ID = ID;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.comicsList = null;
+    }
+
+    public Hero(Long ID, String name, String description, URLImage image, List<Comics> comicsList) {
+        this.ID = ID;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.comicsList = comicsList;
     }
 }

@@ -32,12 +32,26 @@ public class HeroController{
     @GetMapping(value = "/hero/{id}/comics")
     @ResponseBody
     public List<Comics> getComicsListByID(@PathVariable Long id){
-        return null;
+        return heroService.getComicsListforHeroByID(id);
     }
 
     @PostMapping(value = "/hero/add")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Hero> newProduct(@RequestBody Hero hero) {
         return ResponseEntity.ok().body(this.heroService.putHeroInformation(hero));
+    }
+
+    @DeleteMapping(value = "/hero/delete/{id}")
+    public void deleteHero(@PathVariable Long id){
+        heroService.deleteHeroInformation(id);
+    }
+
+    @PutMapping(value = "/hero/update/{id}")
+    public ResponseEntity<Hero> updateHero(@PathVariable Long id, @RequestBody Hero hero){
+        if(hero == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return ResponseEntity.ok(this.heroService.updateHeroInformation(id, hero));
+        }
     }
 }

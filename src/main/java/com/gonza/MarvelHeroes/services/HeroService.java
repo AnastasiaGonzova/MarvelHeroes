@@ -1,5 +1,6 @@
 package com.gonza.MarvelHeroes.services;
 
+import com.gonza.MarvelHeroes.data.Comics;
 import com.gonza.MarvelHeroes.data.Hero;
 import com.gonza.MarvelHeroes.repositories.HeroRepository;
 
@@ -38,10 +39,18 @@ public class HeroService {
 
     public Hero updateHeroInformation(Long id, Hero hero) {
         Hero updatedHero = this.getHeroByID(id);
+
         updatedHero.setName(hero.getName());
         updatedHero.setDescription(hero.getDescription());
-        heroRepository.save(updatedHero);
+        updatedHero.setImage(new URLImageService().updateImageInformation(this.getHeroByID(id).getImage().getID(), hero.getImage()));
+        updatedHero.setComicsList(hero.getComicsList());
+
+        this.putHeroInformation(updatedHero);
         return updatedHero;
 
+    }
+
+    public List<Comics> getComicsListforHeroByID(Long id){
+        return this.getHeroByID(id).getComicsList();
     }
 }

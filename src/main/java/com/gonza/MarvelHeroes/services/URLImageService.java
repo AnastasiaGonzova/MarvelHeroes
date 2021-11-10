@@ -22,4 +22,15 @@ public class URLImageService {
     URLImage getImageByID(Long id){
         return imageRepository.findById(id).get();
     }
+
+    URLImage updateImageInformation(Long id, URLImage image){
+        URLImage updatedImage = this.getImageByID(id);
+
+        updatedImage.setPath(image.getPath());
+        updatedImage.setExtension(image.getExtension());
+
+        this.putImageInformation(updatedImage);
+        return updatedImage;
+
+    }
 }
