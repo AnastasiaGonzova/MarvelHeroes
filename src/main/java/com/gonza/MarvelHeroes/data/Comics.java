@@ -9,55 +9,44 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "Comics")
+@Table(name = "comics")
 public class Comics {
     @Id
-    @SequenceGenerator(name="seq-gen",sequenceName="order_seq",allocationSize=1)
-    @GeneratedValue(strategy= GenerationType.IDENTITY, generator="seq-gen")
-    @Column(name="Comics_ID", nullable = false)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="comics_id", nullable = false)
     private Long ID;
 
-    @Column(name = "digitalID", nullable = false)
+    @Column(name = "digital_id", nullable = false)
     @NotNull
     private Long digitalID;
 
-    @Column(name = "Comics_Title", nullable = false)
+    @Column(name = "comics_title", nullable = false)
     @NotNull
     private String title;
 
-    @Column(name = "Comics_Description", nullable = false)
+    @Column(name = "comics_description", nullable = false)
     @NotNull
     private String description;
 
-    @Column(name = "pageCount", nullable = false)
+    @Column(name = "page_count", nullable = false)
     @NotNull
     private int pageCount;
 
     @ManyToOne
-    @JoinColumn(name="URLImage_ID")
+    @JoinColumn(name="url_image_id")
     @NotNull
     private URLImage image;
 
     @ManyToMany
     @JoinTable(
-            name = "HeroComics",
-            joinColumns = { @JoinColumn(name = "Comics_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "Hero_ID") }
+            name = "hero_comics",
+            joinColumns = { @JoinColumn(name = "comics_id") },
+            inverseJoinColumns = { @JoinColumn(name = "hero_id") }
     )
     private List<Hero> heroList;
 
     public Comics(){
 
-    }
-
-    public Comics(Long ID, Long digitalID, String title, String description, int pageCount, URLImage image) {
-        this.ID = ID;
-        this.digitalID = digitalID;
-        this.title = title;
-        this.description = description;
-        this.pageCount = pageCount;
-        this.image = image;
-        this.heroList = null;
     }
 
     public Comics(Long ID, Long digitalID, String title, String description, int pageCount, URLImage image, List<Hero> heroList) {

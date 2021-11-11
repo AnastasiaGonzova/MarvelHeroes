@@ -10,45 +10,35 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "Hero")
+@Table(name = "hero")
 public class Hero {
     @Id
-    @SequenceGenerator(name="seq-gen",sequenceName="order_seq",allocationSize=1)
-    @GeneratedValue(strategy= GenerationType.IDENTITY, generator="seq-gen")
-    @Column(name="Hero_ID", nullable = false)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="hero_id", nullable = false)
     private Long ID;
 
-    @Column(name = "Hero_Name", nullable = false)
+    @Column(name = "hero_name", nullable = false)
     @NotNull
     private String name;
 
-    @Column(name = "Hero_Description", nullable = false)
+    @Column(name = "hero_description", nullable = false)
     @NotNull
     private String description;
 
     @ManyToOne
-    @JoinColumn(name="URLImage_ID")
-    @NotNull
+    @JoinColumn(name="url_image_id")
     private URLImage image;
 
     @ManyToMany
     @JoinTable(
-            name = "HeroComics",
-            joinColumns = { @JoinColumn(name = "Hero_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "Comics_ID") }
+            name = "hero_comics",
+            joinColumns = { @JoinColumn(name = "hero_id") },
+            inverseJoinColumns = { @JoinColumn(name = "comics_id") }
     )
     private List<Comics> comicsList;
 
     public Hero(){
 
-    }
-
-    public Hero(Long ID, String name, String description, URLImage image) {
-        this.ID = ID;
-        this.name = name;
-        this.description = description;
-        this.image = image;
-        this.comicsList = null;
     }
 
     public Hero(Long ID, String name, String description, URLImage image, List<Comics> comicsList) {

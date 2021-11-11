@@ -7,23 +7,28 @@ import  javax.validation.constraints.NotNull;
 
 @Entity
 @Data
-@Table(name = "URLImage")
+@Table(name = "url_image")
 public class URLImage {
     @Id
-    @SequenceGenerator(name="seq-gen",sequenceName="order_seq",allocationSize=1)
-    @GeneratedValue(strategy= GenerationType.IDENTITY, generator="seq-gen")
-    @Column(name="URLImage_ID", nullable = false)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="url_image_id", nullable = false)
     private Long ID;
 
-    @Column(name = "Path", nullable = false)
+    @Column(name = "path", nullable = false)
     @NotNull
     private String path;
 
-    @Column(name = "Extension", nullable = false)
+    @Column(name = "extension", nullable = false)
     @NotNull
     private String extension;
 
     public URLImage(){
 
+    }
+
+    public URLImage(Long ID, String path, String extension){
+        this.ID = ID;
+        this.path = path;
+        this.extension = extension;
     }
 }
