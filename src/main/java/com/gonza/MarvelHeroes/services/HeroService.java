@@ -16,6 +16,9 @@ public class HeroService {
     @Autowired
     private HeroRepository heroRepository;
 
+    @Autowired
+    private URLImageService imageService;
+
     public Hero putHeroInformation(Hero hero){
         return heroRepository.saveAndFlush(hero);
     }
@@ -33,7 +36,6 @@ public class HeroService {
     }
 
     public void deleteHeroInformation(Long id){
-        new URLImageService().deleteImageInformation(this.getHeroByID(id).getImage().getID());
         heroRepository.deleteById(id);
     }
 
@@ -42,7 +44,12 @@ public class HeroService {
 
         updatedHero.setName(hero.getName());
         updatedHero.setDescription(hero.getDescription());
-        updatedHero.setImage(new URLImageService().updateImageInformation(this.getHeroByID(id).getImage().getID(), hero.getImage()));
+        if(this.getHeroByID(id).getImage()==null) {
+            updatedHero.setImage(imageService.putImageInformation(hero.getImage()));
+        }
+        else {
+            updatedHero.setImage(imageService.updateImageInformation(this.getHeroByID(id).getImage().getID(), hero.getImage()));
+        }
         updatedHero.setComicsList(hero.getComicsList());
 
         this.putHeroInformation(updatedHero);

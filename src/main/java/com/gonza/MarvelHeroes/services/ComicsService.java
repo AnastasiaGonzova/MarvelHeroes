@@ -15,6 +15,9 @@ public class ComicsService {
     @Autowired
     private ComicsRepository comicsRepository;
 
+    @Autowired
+    private URLImageService imageService;
+
     public Comics putComicsInformation(Comics comics){
         return comicsRepository.saveAndFlush(comics);
     }
@@ -32,7 +35,7 @@ public class ComicsService {
     }
 
     public void deleteComicsInformation(Long id){
-        new URLImageService().deleteImageInformation(this.getComicsByID(id).getImage().getID());
+        //new URLImageService().deleteImageInformation(this.getComicsByID(id).getImage().getID());
         comicsRepository.deleteById(id);
     }
 
@@ -43,8 +46,13 @@ public class ComicsService {
         updatedComics.setDescription(comics.getDescription());
         updatedComics.setDigitalID(comics.getDigitalID());
         updatedComics.setPageCount(comics.getPageCount());
-        updatedComics.setImage(new URLImageService().updateImageInformation(this.getComicsByID(id).getImage().getID(), comics.getImage()));
-        updatedComics.setHeroList(comics.getHeroList());
+        if(this.getComicsByID(id).getImage()==null){
+            updatedComics.setImage(imageService.putImageInformation(comics.getImage()));
+        }
+        else{
+            updatedComics.setImage(imageService.updateImageInformation(this.getComicsByID(id).getImage().getID(), comics.getImage()));
+        }
+         updatedComics.setHeroList(comics.getHeroList());
 
         comicsRepository.save(updatedComics);
         return updatedComics;
