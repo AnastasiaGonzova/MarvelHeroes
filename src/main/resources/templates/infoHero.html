@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title th:text="${title}"/>
+    </head>
+    <body>
+        <div>
+            <table th:object="${hero}">
+                <tr>
+                    <th>ID: </th>
+                    <td th:text="${hero.ID}"/>
+                </tr>
+                <tr>
+                    <th>Name: </th>
+                    <td th:text="${hero.name}"/>
+                </tr>
+                <tr>
+                    <th>Description: </th>
+                    <td th:text="${hero.description}"/>
+
+                </tr>
+                <tr>
+                    <th>Image: </th>
+                    <td><img th:src="@{${image}}"width="400px"/></td>
+                </tr>
+                <tr>
+                    <th>
+                        <form th:action="'/marvel/hero/' + ${hero.ID} + '/update'">
+                            <button type="submit">Update information</button>
+                        </form>
+                    </th>
+
+                    <th>
+                        <form th:action="'/marvel/hero/' + ${hero.ID} + '/delete'" method="post">
+                            <button type="submit">Delete information</button>
+                        </form>
+                    </th>
+
+                    <th>
+                        <form th:action="'/marvel/hero/' + ${hero.ID} + '/comics'">
+                            <button type="submit">See the list of the comics</button>
+                        </form>
+                    </th>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

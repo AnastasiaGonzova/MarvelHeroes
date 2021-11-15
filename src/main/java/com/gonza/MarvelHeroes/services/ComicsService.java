@@ -2,8 +2,8 @@ package com.gonza.MarvelHeroes.services;
 
 import com.gonza.MarvelHeroes.data.Comics;
 import com.gonza.MarvelHeroes.data.Hero;
-import com.gonza.MarvelHeroes.extra.URLImage;
 import com.gonza.MarvelHeroes.repositories.ComicsRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +19,8 @@ public class ComicsService {
     private URLImageService imageService;
 
     public Comics putComicsInformation(Comics comics){
+        imageService.putImageInformation(comics.getImage());
         return comicsRepository.saveAndFlush(comics);
-    }
-
-    public List<Comics> putComicsInformation(List<Comics> heroes){
-        return comicsRepository.saveAllAndFlush(heroes);
     }
 
     public Comics getComicsByID(Long id){
@@ -35,7 +32,7 @@ public class ComicsService {
     }
 
     public void deleteComicsInformation(Long id){
-        //new URLImageService().deleteImageInformation(this.getComicsByID(id).getImage().getID());
+        imageService.deleteImageInformation(this.getComicsByID(id).getImage().getID());
         comicsRepository.deleteById(id);
     }
 
@@ -50,7 +47,9 @@ public class ComicsService {
             updatedComics.setImage(imageService.putImageInformation(comics.getImage()));
         }
         else{
-            updatedComics.setImage(imageService.updateImageInformation(this.getComicsByID(id).getImage().getID(), comics.getImage()));
+            if(comics.getImage() == null){
+                updatedComics.setImage(imageService.updateImageInformation(this.getComicsByID(id).getImage().getID(), comics.getImage()));
+            }
         }
          updatedComics.setHeroList(comics.getHeroList());
 

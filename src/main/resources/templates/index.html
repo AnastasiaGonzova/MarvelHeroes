@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Marvel Heroes</title>
+    </head>
+    <body>
+        <h1>Welcome to the Marvel Heroes Card File</h1>
+        <p>Hey there! See information about heroes or comics</p>
+        <form th:action="'/marvel/hero'">
+            <button type="submit">See information about heroes</button>
+        </form>
+        <form th:action="'/marvel/comics'">
+            <button type="submit">See information about comics</button>
+        </form>
+    </body>
+</html>

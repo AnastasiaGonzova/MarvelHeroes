@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"/>
+</head>
+<body>
+<div>
+    <p>Amount of comics: <span th:text="${number}"/></p>
+    <table th:each="comics : ${comics}">
+        <tr>
+            <th>ID: </th>
+            <td th:text="${comics.ID}"/>
+        </tr>
+        <tr>
+            <th>Digital ID: </th>
+            <td th:text="${comics.digitalID}"/>
+        </tr>
+        <tr>
+            <th>Title: </th>
+            <td th:text="${comics.title}"/>
+        </tr>
+        <tr>
+            <th>Description: </th>
+            <td th:text="${comics.description}"/>
+
+        </tr>
+        <tr>
+            <th>Page Count: </th>
+            <td th:text="${comics.pageCount}"/>
+
+        </tr>
+        <tr>
+            <th>Image: </th>
+            <td><img th:src="@{${comics.image.path}}"/></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

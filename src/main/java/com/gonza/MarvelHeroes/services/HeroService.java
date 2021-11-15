@@ -20,11 +20,8 @@ public class HeroService {
     private URLImageService imageService;
 
     public Hero putHeroInformation(Hero hero){
+        imageService.putImageInformation(hero.getImage());
         return heroRepository.saveAndFlush(hero);
-    }
-
-    public List<Hero> putHeroesInformation(List<Hero> heroes){
-        return heroRepository.saveAllAndFlush(heroes);
     }
 
     public Hero getHeroByID(Long id){
@@ -36,6 +33,7 @@ public class HeroService {
     }
 
     public void deleteHeroInformation(Long id){
+        //imageService.deleteImageInformation(this.getHeroByID(id).getImage().getID());
         heroRepository.deleteById(id);
     }
 
@@ -48,9 +46,11 @@ public class HeroService {
             updatedHero.setImage(imageService.putImageInformation(hero.getImage()));
         }
         else {
-            updatedHero.setImage(imageService.updateImageInformation(this.getHeroByID(id).getImage().getID(), hero.getImage()));
+            if(hero.getImage() != null){
+                updatedHero.setImage(imageService.updateImageInformation(this.getHeroByID(id).getImage().getID(), hero.getImage()));
+            }
         }
-        updatedHero.setComicsList(hero.getComicsList());
+        //updatedHero.setComicsList(hero.getComicsList());
 
         this.putHeroInformation(updatedHero);
         return updatedHero;

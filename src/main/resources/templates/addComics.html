@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Comics</title>
+</head>
+<body>
+<form th:action="@{/marvel/comics/add}" th:object="${comics}" method="POST" enctype="multipart/form-data">
+    <input type="number" name="digitalID" placeholder="Enter the digital ID of the comics"/>
+    <br/>
+    <input type="text" name="title" placeholder="Enter the title of the comics"/>
+    <br/>
+    <textarea type="text"  name="description" placeholder="Enter a description of the comics"></textarea>
+    <br/>
+    <input type="number" name="pageCount" placeholder="Enter a page count of the comics"/>
+    <br/>
+    <input type="file" name="file" accept="image/jpeg" value="Select an image"/>
+    <br>
+    <input type="submit" value="Submit" />
+</form>
+<br/>
+</body>
+</html>

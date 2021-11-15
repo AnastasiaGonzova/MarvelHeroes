@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Marvel Heroes</title>
+</head>
+<body>
+<div>
+    <p><a th:href="'/marvel/hero/add'">Add information about the hero</a></p>
+    <p>Amount of heroes: <span th:text="${number}"/></p>
+    <table th:each="hero : ${heroes}">
+        <tr>
+            <td><img th:src="@{${hero.image.path}}" width="100px"/>
+            <td th:text="${hero.name}"/>
+            <td><form th:action="'/marvel/hero/' + ${hero.ID}">
+                <button type="submit">More</button>
+            </form></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

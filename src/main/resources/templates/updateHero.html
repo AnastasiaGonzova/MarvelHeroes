@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Hero</title>
+</head>
+<body>
+<div th:object="${hero}">
+<form th:action="'/marvel/hero/' + ${hero.ID} + '/update'" method="POST">
+    <input th:value="${hero.name}" type="text" name="name" placeholder="Enter the name of the hero"/>
+    <br/>
+    <textarea th:text="${hero.description}" type="text" name="description" placeholder="Enter a description of the hero"></textarea>
+    <br/>
+    <input type="file"  name="image" accept="image/jpeg" value="Select an image"/>
+    <br>
+    <input type="submit" value="Submit" />
+</form>
+</div>
+<br/>
+</body>
+</html>

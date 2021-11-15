@@ -25,6 +25,7 @@ public class Hero {
     @NotNull
     private String description;
 
+
     @ManyToOne
     @JoinColumn(name="url_image_id")
     private URLImage image;
@@ -39,6 +40,20 @@ public class Hero {
 
     public Hero(){
 
+    }
+
+    public Hero(String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.image = null;
+        this.comicsList = null;
+    }
+
+    public Hero(String name, String description, URLImage image) {
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.comicsList = null;
     }
 
     public Hero(Long ID, String name, String description, URLImage image, List<Comics> comicsList) {

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Add New Hero</title>
+    </head>
+    <body>
+        <form th:action="@{/marvel/hero/add}" th:object="${hero}" method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Enter the name of the hero"/>
+            <br/>
+            <textarea type="text"  name="description" placeholder="Enter a description of the hero"></textarea>
+            <br/>
+            <input type="file" name="file" accept="image/jpeg" value="Select an image"/>
+            <br>
+
+            <input type="submit" value="Submit" />
+        </form>
+        <br/>
+    </body>
+</html>

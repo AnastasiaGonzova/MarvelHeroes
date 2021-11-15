@@ -34,19 +34,43 @@ public class Comics {
 
     @ManyToOne
     @JoinColumn(name="url_image_id")
-    @NotNull
     private URLImage image;
 
-    @ManyToMany
-    @JoinTable(
-            name = "hero_comics",
-            joinColumns = { @JoinColumn(name = "comics_id") },
-            inverseJoinColumns = { @JoinColumn(name = "hero_id") }
-    )
+    @ManyToMany(mappedBy = "comicsList")
+
     private List<Hero> heroList;
 
     public Comics(){
 
+    }
+
+    public Comics(Long digitalID, String title, String description, int pageCount, URLImage image, List<Hero> heroList) {
+        this.digitalID = digitalID;
+        this.title = title;
+        this.description = description;
+        this.pageCount = pageCount;
+        this.image = image;
+        this.heroList = heroList;
+    }
+
+    public Comics(Long digitalID, String title, String description, int pageCount, URLImage image) {
+        this.ID = ID;
+        this.digitalID = digitalID;
+        this.title = title;
+        this.description = description;
+        this.pageCount = pageCount;
+        this.image = image;
+        this.heroList = null;
+    }
+
+    public Comics(Long digitalID, String title, String description, int pageCount) {
+        this.ID = ID;
+        this.digitalID = digitalID;
+        this.title = title;
+        this.description = description;
+        this.pageCount = pageCount;
+        this.image = null;
+        this.heroList = null;
     }
 
     public Comics(Long ID, Long digitalID, String title, String description, int pageCount, URLImage image, List<Hero> heroList) {
